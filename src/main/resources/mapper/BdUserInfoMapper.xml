@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liang.study.mode.dao.BdUserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.liang.study.mode.BdUserInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="source_member_id" property="sourceMemberId" jdbcType="VARCHAR" />
+    <result column="member_channel_type" property="memberChannelType" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+    <result column="count_aum" property="countAum" jdbcType="DECIMAL" />
+    <result column="total_money" property="totalMoney" jdbcType="DECIMAL" />
+    <result column="is_allocation" property="isAllocation" jdbcType="CHAR" />
+    <result column="first_investment_time" property="firstInvestmentTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, source_member_id, member_channel_type, level, count_aum, total_money, is_allocation, 
+    first_investment_time, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bd_user_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bd_user_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.liang.study.mode.BdUserInfo" >
+    insert into bd_user_info (id, source_member_id, member_channel_type, 
+      level, count_aum, total_money, 
+      is_allocation, first_investment_time, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{sourceMemberId,jdbcType=VARCHAR}, #{memberChannelType,jdbcType=VARCHAR}, 
+      #{level,jdbcType=VARCHAR}, #{countAum,jdbcType=DECIMAL}, #{totalMoney,jdbcType=DECIMAL}, 
+      #{isAllocation,jdbcType=CHAR}, #{firstInvestmentTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.liang.study.mode.BdUserInfo" >
+    insert into bd_user_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sourceMemberId != null" >
+        source_member_id,
+      </if>
+      <if test="memberChannelType != null" >
+        member_channel_type,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="countAum != null" >
+        count_aum,
+      </if>
+      <if test="totalMoney != null" >
+        total_money,
+      </if>
+      <if test="isAllocation != null" >
+        is_allocation,
+      </if>
+      <if test="firstInvestmentTime != null" >
+        first_investment_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="sourceMemberId != null" >
+        #{sourceMemberId,jdbcType=VARCHAR},
+      </if>
+      <if test="memberChannelType != null" >
+        #{memberChannelType,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="countAum != null" >
+        #{countAum,jdbcType=DECIMAL},
+      </if>
+      <if test="totalMoney != null" >
+        #{totalMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="isAllocation != null" >
+        #{isAllocation,jdbcType=CHAR},
+      </if>
+      <if test="firstInvestmentTime != null" >
+        #{firstInvestmentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.liang.study.mode.BdUserInfo" >
+    update bd_user_info
+    <set >
+      <if test="sourceMemberId != null" >
+        source_member_id = #{sourceMemberId,jdbcType=VARCHAR},
+      </if>
+      <if test="memberChannelType != null" >
+        member_channel_type = #{memberChannelType,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="countAum != null" >
+        count_aum = #{countAum,jdbcType=DECIMAL},
+      </if>
+      <if test="totalMoney != null" >
+        total_money = #{totalMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="isAllocation != null" >
+        is_allocation = #{isAllocation,jdbcType=CHAR},
+      </if>
+      <if test="firstInvestmentTime != null" >
+        first_investment_time = #{firstInvestmentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.liang.study.mode.BdUserInfo" >
+    update bd_user_info
+    set source_member_id = #{sourceMemberId,jdbcType=VARCHAR},
+      member_channel_type = #{memberChannelType,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
+      count_aum = #{countAum,jdbcType=DECIMAL},
+      total_money = #{totalMoney,jdbcType=DECIMAL},
+      is_allocation = #{isAllocation,jdbcType=CHAR},
+      first_investment_time = #{firstInvestmentTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

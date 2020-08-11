@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <classPathEntry location="C:\repository\mysql\mysql-connector-java\8.0.21\mysql-connector-java-8.0.21.jar"/>
+
+    <context id="mysqlGenerator" targetRuntime="MyBatis3">
+        <!-- plugin start -->
+        <!-- <plugin type="com.vince.utils.mybaties.plugin.MySqlPaginationPlugin"
+            /> -->
+        <!-- plugin end -->
+        <!-- 生成的Java文件的编码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+
+        <!-- 去掉默认的注释 -->
+        <commentGenerator >
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- 配置连接数据信息 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://39.107.27.160:3306/isp_crm"
+                        userId="wallet_rd" password="63cOcPxW"/>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 配置自动生成的Model的保存路径与其它参数 -->
+        <javaModelGenerator targetPackage="com.liang.study.mode" targetProject="src/main/java">
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 配置自动生成的 Mapper.xml映射的保存路径与其它参数 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- 配置自动生成的 Mapper.java接口的保存路径与其它参数 -->
+        <javaClientGenerator targetPackage="com.liang.study.mode.dao" targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="bd_user_info" domainObjectName="BdUserInfo"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" enableDeleteByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+    </context>
+
+</generatorConfiguration>

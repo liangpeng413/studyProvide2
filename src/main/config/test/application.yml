@@ -1,0 +1,45 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /study
+
+spring:
+  #环境
+  profiles:
+    active: test
+  #项目名
+  application:
+    name: study
+  #数据驱动
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: mysql://39.107.27.160:3306/isp_oms?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: wallet_rd
+    password: 63cOcPxW
+
+  #页面模板解析
+  thymeleaf:
+    #页面路径
+    prefix: classpath:/templates/
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    suffix: .html
+    #线上环境启用true
+    cache: false
+
+  #rabbitmq
+  rabbitmq:
+    host: localhost
+    username: admin
+    password: admin
+    virtual-host: /admin
+
+study:
+  rabbitmq:
+    direct:
+      queue: study_test_queue
+    topic:
+      queue: study_test_exchange_topic
