@@ -33,6 +33,17 @@ spring:
     username: admin
     password: admin
     virtual-host: /admin
+    #开启发送确认
+    publisher-confirm: true
+    #开启发送失败退回
+    publisher-returns: true
+    listener:
+      direct:
+        #手动ack
+        acknowledge-mode: manual
+      simple:
+        #手动ack
+        acknowledge-mode: manual
 
   #开始aop
   aop:
@@ -44,6 +55,15 @@ study:
       queue: study_test_queue
     topic:
       queue: study_test_exchange_topic
+    #ACK模式queue名
+    ack:
+      #queue
+      queue: study.rabbitmq.queue.ack
+      #routingkey
+      routing:
+        key: study.rabbitmq.routing.key.ack
+      #交换器名
+      exchange: study.rabbitmq.exchange.ack
 
 
 

@@ -8,6 +8,7 @@ import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +31,12 @@ public class RabbitmqProductTest {
     private String rabbitmqTopicQueue;
     @Autowired
     private AmqpTemplate rabbitmqTemplate;
+
+    @Value("${study.rabbitmq.ack.routing.key}")
+    private String ACK_ROUTING_KEY;
+
+    @Value("${study.rabbitmq.ack.queue}")
+    private String ACK_QUEUE;
 
     @Log("hhhh")
     @ResponseBody
@@ -82,5 +89,23 @@ public class RabbitmqProductTest {
             status = "false";
         }
         return status;
+    }
+
+
+
+    @ResponseBody
+    @RequestMapping(value = "/ack",method = RequestMethod.GET)
+    public ResponseEntity sendRabbitmqAckTest(){
+        String status = "false";
+        BdUserInfo bdUserInfo = new BdUserInfo();
+        bdUserInfo.setId(1L);
+        bdUserInfo.setCountAum(new BigDecimal(1000));
+        bdUserInfo.setCreateTime(new Date());
+        bdUserInfo.setTotalMoney(new BigDecimal(3000));
+        String sendParam = null;
+        log.info("【RabbitmqProductTest-sendRabbitmqTest ACK模式测试rabbitmq发送】,入参：request={}",sendParam);
+        sendParam = JSONObject.toJSONString(bdUserInfo);
+        rabbitmqTemplate.convertAndSend(ACK_QUEUE,ACK_ROUTING_KEY,sendParam);
+        return ResponseEntity.ok(sendParam);
     }
 }
